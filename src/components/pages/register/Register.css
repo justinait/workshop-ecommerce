@@ -18,11 +18,11 @@
     padding: 8px;
   }
   
-  .password-container {
+  .passwordContainer {
     position: relative;
   }
   
-  .password-toggle {
+  .passwordToggle {
     position: absolute;
     right: 10px;
     top: 50%;

@@ -1,14 +1,21 @@
 import React, { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { menuItems } from "../../../router/navigation";
+import { onLogOut } from "../../../firebaseConfig";
 
 
 function Navbar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
+  let navigate = useNavigate()
+
+  const handleLogOut = () => {
+    onLogOut();
+    navigate('/login')
+  }
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -34,8 +41,8 @@ function Navbar(props) {
 
         <li>
           <div className="listItem">
-            <LogoutIcon className="listItemIcon" />
-            <span className="listItemText">Cerrar sesión</span>
+            <LogoutIcon className="listItemIcon"  />
+            <span className="listItemText" onClick={handleLogOut}>Cerrar sesión</span>
           </div>
         </li>
       </ul>

@@ -18,11 +18,11 @@
     padding: 8px;
   }
   
-  .password-container {
+  .passwordContainer {
     position: relative;
   }
   
-  .password-toggle {
+  .passwordToggle {
     position: absolute;
     right: 10px;
     top: 50%;
@@ -44,7 +44,7 @@
     cursor: pointer;
   }
   
-  .google-button {
+  .googleButton {
     background-color: #ffb630;
     color: white;
     border: none;

@@ -4,33 +4,64 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import GoogleIcon from "@mui/icons-material/Google";
 import "./Login.css";
+import {loginGoogle, onSignIn} from '../../../firebaseConfig'
 
 const Login = () => {
+
   const [showPassword, setShowPassword] = useState(false);
+  const [userCredentials, setUserCredentials] = useState({
+    email:'',
+    password:''
+  })
+
+  const handleChange = (e) => {
+    setUserCredentials({...userCredentials, [e.target.name]: e.target.value})
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await onSignIn(userCredentials);
+      
+      if(res.user){
+        navigate('/');
+      }  
+    } catch (error) {
+      console.log(error);  
+    }
+  }
+
+  const googleSignIn = async () => {
+    let res = await loginGoogle();
+    return res;
+  }
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const navigate = useNavigate();
+  
   return (
     <div className="container">
-      <form className="form">
+      <form onSubmit={handleSubmit} className="form">
         <div className="input">
           <input
             type="text"
             name="email"
+            onChange={handleChange}
             placeholder="Email"
             className="input"
           />
         </div>
-        <div className="password-container">
+        <div className="passwordContainer">
           <input
             type={showPassword ? "text" : "password"}
             name="password"
+            onChange={handleChange}
             placeholder="Contraseña"
             className="input"
           />
           <span
             onClick={handleClickShowPassword}
-            className="password-toggle"
+            className="passwordToggle"
           >
             {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
           </span>
@@ -46,7 +77,8 @@ const Login = () => {
         </button>
         <button
           type="button"
-          className="google-button"
+          className="googleButton"
+          onClick={googleSignIn} 
         >
           <GoogleIcon style={{ marginRight: "8px" }} /> Ingresa con Google
         </button>
