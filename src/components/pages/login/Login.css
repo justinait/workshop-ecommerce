@@ -1,0 +1,55 @@
+/* Login.css */
+.container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input {
+    margin-bottom: 16px;
+    padding: 8px;
+  }
+  
+  .password-container {
+    position: relative;
+  }
+  
+  .password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  
+  .link {
+    color: steelblue;
+    margin-top: 10px;
+  }
+  
+  .button {
+    background-color: #ffb630;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-bottom: 16px;
+    cursor: pointer;
+  }
+  
+  .google-button {
+    background-color: #ffb630;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-bottom: 16px;
+    cursor: pointer;
+  }
+  

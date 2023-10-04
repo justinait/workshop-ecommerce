@@ -1,18 +1,7 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  Grid,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  TextField,
-} from "@mui/material";
-
-import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -21,112 +10,57 @@ const Register = () => {
   const handleClickShowPassword = () => setShowPassword(!showPassword);
 
   return (
-    <Box
-      sx={{
-        width: "100%",
-        minHeight: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-        // backgroundColor: theme.palette.secondary.main,
-      }}
+    <div
+      className="container"
     >
       <form>
-        <Grid
-          container
-          rowSpacing={2}
-          // alignItems="center"
-          justifyContent={"center"}
-        >
-          <Grid item xs={10} md={12}>
-            <TextField name="email" label="Email" fullWidth />
-          </Grid>
-          <Grid item xs={10} md={12}>
-            <FormControl variant="outlined" fullWidth>
-              <InputLabel htmlFor="outlined-adornment-password">
-                Contraseña
-              </InputLabel>
-              <OutlinedInput
-                id="outlined-adornment-password"
-                type={showPassword ? "text" : "password"}
-                name="password"
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      edge="end"
-                    >
-                      {showPassword ? (
-                        <VisibilityOff color="primary" />
-                      ) : (
-                        <Visibility color="primary" />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                label="Contraseña"
-              />
-            </FormControl>
-          </Grid>
-          <Grid item xs={10} md={12}>
-            <FormControl variant="outlined" fullWidth>
-              <InputLabel htmlFor="outlined-adornment-password">
-                Confirmar contraseña
-              </InputLabel>
-              <OutlinedInput
-                id="outlined-adornment-password"
-                type={showPassword ? "text" : "password"}
-                name="confirmPassword"
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      edge="end"
-                    >
-                      {showPassword ? (
-                        <VisibilityOff color="primary" />
-                      ) : (
-                        <Visibility color="primary" />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                label="Confirmar contraseña"
-              />
-            </FormControl>
-          </Grid>
-          <Grid container justifyContent="center" spacing={3} mt={2}>
-            <Grid item xs={10} md={7}>
-              <Button
-                variant="contained"
-                fullWidth
-                type="submit"
-                sx={{
-                  color: "white",
-                  textTransform: "none",
-                  textShadow: "2px 2px 2px grey",
-                }}
-              >
-                Registrarme
-              </Button>
-            </Grid>
-            <Grid item xs={10} md={7}>
-              <Button
-                variant="contained"
-                fullWidth
-                onClick={() => navigate("/login")}
-                type="button"
-              >
-                Regresar
-              </Button>
-            </Grid>
-          </Grid>
-        </Grid>
+        <div className="form">
+          <input
+            type="text"
+            name="email"
+            placeholder="Email"
+            className="input"
+          />
+          <div className="password-container">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="Contraseña"
+              className="input"
+            />
+            <span
+              onClick={handleClickShowPassword}
+              className="password-toggle"
+            >
+              {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+            </span>
+          </div>
+          <div className="password-container">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="confirmPassword"
+              placeholder="Confirmar contraseña"
+              className="input"
+            />
+            <span
+              onClick={handleClickShowPassword}
+              className="password-toggle"
+            >
+              {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+            </span>
+          </div>
+          <Link to="/login" className="link">
+            Regresar
+          </Link>
+          <button
+            type="submit"
+            className="button"
+          >
+            Registrarme
+          </button>
+        </div>
       </form>
-    </Box>
+    </div>
   );
 };
 

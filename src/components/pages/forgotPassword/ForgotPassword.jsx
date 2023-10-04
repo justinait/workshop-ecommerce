@@ -1,61 +1,34 @@
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
-
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <Box
-        sx={{
-          width: "100%",
-          minHeight: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          gap: "40px",
-          // backgroundColor: theme.palette.secondary.main,
-        }}
-      >
-        <Typography variant="h5" color={"primary"}>
-          ¿Olvidaste tu contraseña?
-        </Typography>
+    <div className="container">
+      <div className="content">
+        <h5 className="title">¿Olvidaste tu contraseña?</h5>
         <form>
-          <Grid
-            container
-            rowSpacing={2}
-            // alignItems="center"
-            justifyContent={"center"}
-          >
-            <Grid item xs={10} md={12}>
-              <TextField
-                type="text"
-                variant="outlined"
-                label="Email"
-                fullWidth
-                name="email"
-              />
-            </Grid>
-            <Grid item xs={10} md={12}>
-              <Button type="submit" variant="contained" fullWidth>
-                Recuperar
-              </Button>
-            </Grid>
-            <Grid item xs={10} md={12}>
-              <Button
-                type="submit"
-                variant="contained"
-                fullWidth
-                onClick={() => navigate("/login")}
-              >
-                Regresar
-              </Button>
-            </Grid>
-          </Grid>
+          <div className="form">
+            <input
+              type="text"
+              name="email"
+              placeholder="Email"
+              className="input"
+            />
+            <button type="submit" className="button">
+              Recuperar
+            </button>
+            <button
+              type="button"
+              onClick={() => navigate("/login")}
+              className="button"
+            >
+              Regresar
+            </button>
+          </div>
         </form>
-      </Box>
+      </div>
     </div>
   );
 };
