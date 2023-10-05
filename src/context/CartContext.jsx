@@ -28,10 +28,33 @@ function CartContextComponent({children}) {
         return product?.quantity;
     }
 
+    const clearCart = ( ) => {
+        setCart([]);
+    }
+
+    const deleteById = (id) => {
+        const newArr = cart.filter(e=> {
+            e.id !== id;
+        })
+        setCart(newArr);
+    }
+    
+    const getTotalPrice = ()=> {
+        const total = cart.reduce((acc, e)=>{
+            return acc + (e.unit_price * e.quantity);
+        }, 0)
+        // al ser un arreglo de numeros no pasa nada pero si es de OBJETOS como este hay q poner 0
+        return total;
+    }
+
+
     let data={
         cart,
         addToCartContext,
-        getQuantityById
+        getQuantityById,
+        clearCart,
+        deleteById,
+        getTotalPrice
     }
 
   return (
