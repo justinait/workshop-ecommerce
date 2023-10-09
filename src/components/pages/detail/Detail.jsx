@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { db } from '../../../firebaseConfig';
 import {getDoc, collection, doc} from "firebase/firestore"
 import { CartContext } from '../../../context/CartContext';
+import './Detail.css'
 
 function Detail() {
 
@@ -48,26 +49,32 @@ function Detail() {
 
   return (
     <div>
-
-      <div>Detail</div>
+      
       {
         product && 
-        <div>
-          <img src={product.image}/>
+        <div className='detailContainer'>
+          <img src={product.image} className='detailImage'/>
+          <div className='InfoDetailContainer'>
+            <div className='detailTitle'>{product.title}</div>
+            <div className='detailPrice'>$ {product.unit_price}</div>
+            {
+              product?.stock === quantity && <p>no hay mas stock!</p>
+            }
+
+            <div className='addCartButtonContainer'>
+              
+              <div className='itemCountContainer'>
+                <button className='buttonCount' onClick={ onRemove }> - </button>
+                <p> { count } </p>
+                <button className='buttonCount' onClick={ onAdd }> + </button>
+              </div>
+              <button className="addCartButton" onClick={() => addToCart(count)} > Agregar al carrito </button>
+            </div>
+
+          </div>
         </div>
       }
-      {
-        product?.stock === quantity && <p>no hya mas stock!</p>
-      }
-      <div>
-        <div className='ItemCountContainer'>
-            <button onClick={ onAdd }> + </button>
-            <p> { count } </p>
-            <button onClick={ onRemove }> - </button>
-        </div>
-        <button variant="outline-dark" onClick={() => addToCart(count)} className='cartButton'> Agregar al carrito </button>
-            
-        </div>
+      
     </div>
   )
 }

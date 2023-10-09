@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { db } from '../../../firebaseConfig'
 import {getDocs, collection} from "firebase/firestore"
 import { Link } from 'react-router-dom';
+import './ItemList.css'
 
 function ItemListContainer() {
     const [products, setProducts] = useState([]);
@@ -23,21 +24,23 @@ function ItemListContainer() {
 
   return (
     <div>
-        <h1>shop</h1>
+        <h1>Nuestros Productos</h1>
+        <div className='itemListContainer'>
         {
             products.map(e=>{
                 return(
-                    <Link to={`/detail/${e.id}`}>
-                        <div key={e.id}>
-                            <img src={e.image} width='200' alt={e.title} />
-                            <p>{e.title}</p>
-                            <p>$ {e.unit_price}</p>
-                            <p>{e.stock}</p>
+                    <Link to={`/detail/${e.id}`} key={e.id}  className='itemContainer'>
+                        <div>
+                            <img src={e.image} alt={e.title} />
+                            <p className='titleItemList'>{e.title}</p>
+                            <p className='priceItemList'>$ {e.unit_price}</p>
                         </div>
                     </Link>
                 )
             })
         }
+
+        </div>
     </div>
   )
 }

@@ -82,7 +82,7 @@ const Login = () => {
         >
           <GoogleIcon style={{ marginRight: "8px" }} /> Ingresa con Google
         </button>
-        <p style={{ color: "#ffb630", marginTop: "10px" }}>
+        <p style={{ color: "var(--color-secondary)", marginTop: "10px" }}>
           ¿Aún no tienes cuenta?
         </p>
         <button

@@ -36,7 +36,7 @@
   }
   
   .button {
-    background-color: #ffb630;
+    background-color: var(--color-secondary);
     color: white;
     border: none;
     padding: 10px 20px;

@@ -1,0 +1,39 @@
+.itemListContainer {
+    width: 80vw;
+    display: flex;
+    margin: 5% auto;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.itemContainer{
+    width: 80%;
+    margin: 3% auto;
+}
+
+.itemContainer img {
+    width: 100%;
+}
+
+.titleItemList{
+    font-size: var(--font-size-titles-mobile);
+    margin: 7% 0 2%;
+}
+
+.priceItemList {
+    font-size: var(--font-size-subtitles-mobile);
+}
+
+@media (min-width:640px){
+    .itemContainer{
+        width: 40%;
+        margin: 3%;
+    }
+}
+
+@media (min-width:1280px){
+    .itemContainer{
+        width: 30%;
+        margin: 3%;
+    }
+}
