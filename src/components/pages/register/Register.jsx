@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { signUp } from "../../../firebaseConfig";
+import { db, signUp } from "../../../firebaseConfig";
+import {setDoc, addDoc, doc} from "firebase/firestore"
 
 const Register = () => {
   const navigate = useNavigate();
@@ -21,9 +22,11 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await signUp(userCredentials);
-      console.log(res);
-      navigate('/')
+      let res = await signUp(userCredentials);
+      if(res.user.uid){
+        await setDoc(doc(db, "users", res.user.uid), {rol: "user"})
+      }
+      navigate('/');
     } catch (error) {
       console.log(error);  
     }
