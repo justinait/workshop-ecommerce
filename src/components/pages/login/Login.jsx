@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import GoogleIcon from "@mui/icons-material/Google";
 import "./Login.css";
-import {loginGoogle, onSignIn} from '../../../firebaseConfig'
+import {db, loginGoogle, onSignIn} from '../../../firebaseConfig'
+import {collection, doc, getDoc} from "firebase/firestore"
+import { AuthContext } from "../../../context/AuthContext";
 
 const Login = () => {
+  const {handleLogin} = useContext(AuthContext)
+
 
   const [showPassword, setShowPassword] = useState(false);
   const [userCredentials, setUserCredentials] = useState({
@@ -24,6 +28,18 @@ const Login = () => {
       const res = await onSignIn(userCredentials);
       
       if(res.user){
+        
+        const userCollection = collection(db, "users");
+        const userRef = doc(userCollection, res.user.uid)
+        const userDoc = await getDoc(userRef);
+
+        let finallyUser = {
+          email: res.user.email,
+          rol: userDoc.data().rol
+        }
+
+        handleLogin(finallyUser);//le paso el usuario logueado al contexto
+
         navigate('/');
       }  
     } catch (error) {

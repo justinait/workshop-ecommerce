@@ -1,19 +1,26 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import { menuItems } from "../../../router/navigation";
 import { onLogOut } from "../../../firebaseConfig";
+import { AuthContext } from "../../../context/AuthContext";
 
 
 function Navbar(props) {
+  
+  const {handleLogoutAuth, user} = useContext(AuthContext);
+  
   const { window } = props;
-  const [mobileOpen, setMobileOpen] = useState(false);
   let navigate = useNavigate()
+
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleLogOut = () => {
     onLogOut();
+    handleLogoutAuth()
     navigate('/login')
   }
 
@@ -38,6 +45,18 @@ function Navbar(props) {
             </li>
           );
         })}
+        {/* dashboard */}
+        {
+          user.rol === import.meta.env.VITE_ROLADMIN &&
+          <li>
+            <Link to={"/dashboard"}>
+              <div className="listItem">
+                <DashboardIcon className="listItemIcon"/>
+                <span className="listItemText">{"Dashboard"}</span>
+              </div>
+            </Link>
+          </li>
+        }
 
         <li>
           <div className="listItem">

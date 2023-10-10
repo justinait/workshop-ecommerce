@@ -12,12 +12,12 @@ import {
 } from "firebase/auth"
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDB-3i8U-3okwHy3bkqGMrPQ1uAsqIogyM",
-  authDomain: "cora-cuadernos.firebaseapp.com",
-  projectId: "cora-cuadernos",
-  storageBucket: "cora-cuadernos.appspot.com",
-  messagingSenderId: "850562593577",
-  appId: "1:850562593577:web:7fe8513011cd1a3dbd7d38"
+  apiKey: import.meta.env.VITE_APIKEY,
+  authDomain: import.meta.env.VITE_AUTH,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_ID,
+  appId: import.meta.env.VITE_APP_ID
 };
 
 const app = initializeApp(firebaseConfig);

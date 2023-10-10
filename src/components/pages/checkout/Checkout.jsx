@@ -6,7 +6,7 @@ import axios from 'axios'
 function Checkout() {
 
     const {cart} = useContext(CartContext)
-    initMercadoPago("APP_USR-9cd33c8c-34a3-4056-832b-08adca935b08",
+    initMercadoPago(import.meta.env.VITE_PUBLICKEY,
     {locale:"es-AR"})
 
     const [preferenceId, setPreferenceId] = useState(null)
