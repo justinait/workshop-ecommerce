@@ -60,9 +60,7 @@
         text-align: center;
     }
     .itemCountContainer {
-        height: 30px;
-        display: flex;
-        width: 30%;
+        width: 15%;
         margin: 5%;
         justify-content: space-evenly;
     }
