@@ -27,7 +27,7 @@ const Login = () => {
     try {
       const res = await onSignIn(userCredentials);
       
-      if(res.user){
+      if(res?.user){
         
         const userCollection = collection(db, "users");
         const userRef = doc(userCollection, res.user.uid)
@@ -39,7 +39,6 @@ const Login = () => {
         }
 
         handleLogin(finallyUser);//le paso el usuario logueado al contexto
-
         navigate('/');
       }  
     } catch (error) {
@@ -49,7 +48,13 @@ const Login = () => {
 
   const googleSignIn = async () => {
     let res = await loginGoogle();
-    return res;
+    let finallyUser = {
+      email: res.user.email,
+      rol: "user"
+    }
+
+    handleLogin(finallyUser);
+    navigate('/');
   }
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
