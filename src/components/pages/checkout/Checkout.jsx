@@ -4,7 +4,7 @@ import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import axios from 'axios'
 import { Link, useLocation } from 'react-router-dom';
 import { db } from '../../../firebaseConfig';
-import {addDoc, collection, doc, updateDoc, serverTimestamp} from "firebase/firestore"
+import {addDoc, getDoc, collection, doc, updateDoc, serverTimestamp} from "firebase/firestore"
 
 function Checkout() {
 
