@@ -78,7 +78,7 @@ function Navbar(props) {
           <Link to="/" className="appTitle">
             Cora Cuadernos
           </Link>
-          <button className="menuButton" onClick={handleDrawerToggle}>
+          <button className="menuButton button" onClick={handleDrawerToggle}>
             <MenuIcon className="burgerMenuIcon" />
           </button>
         </div>

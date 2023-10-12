@@ -1,0 +1,24 @@
+:root {
+    --color-primary: #F0B6DF;
+    --color-secondary: #EC9521;
+    --orange-secondary: #feae46;
+    --font-size-titles: 26px;
+    --font-size-titles-mobile: 20px;
+    --font-size-subtitles: 23px;
+    --font-size-subtitles-mobile: 18px;
+}
+
+.buttonHover{
+    border: 2px rgba(138, 138, 138, 0.753) solid;
+    border-radius: 20px;
+    background-color: white;
+    padding: 0.8%;
+    margin: 1% 0;
+}
+
+@media(min-width:1024px){
+    .buttonHover:hover{
+        background-color: var(--orange-secondary);
+        border: 2px var(--orange-secondary) solid;
+    }
+}
