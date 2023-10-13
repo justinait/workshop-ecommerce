@@ -9,14 +9,15 @@ import EditIcon from '@mui/icons-material/Edit';
 
 function ProductsList({products, setIsChange}) {
 
+    const [productSelected, setProductSelected] = useState(null)
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
   
-    const editProduct = (id) => {
-        handleShow(id);
-        return console.log('hola')
+    const handleOpen = (product) => {
+        handleShow();
+        setProductSelected(product);
     }
   
     const deleteProduct = (id) => {
@@ -29,7 +30,7 @@ function ProductsList({products, setIsChange}) {
 
   return (
     <div>
-        <button onClick={addProduct}>Agregar Nuevo Producto</button>
+        <button onClick={()=>handleOpen(null)}>Agregar Nuevo Producto</button>
 
         <table>
             <thead>
@@ -53,7 +54,7 @@ function ProductsList({products, setIsChange}) {
                             <td><img src={e.image} width={80} alt={e.title} /></td>
                             <td>{e.stock}</td>
                             <td>
-                                <button onClick={()=> editProduct(e) }> <EditIcon/> Editar</button>
+                                <button onClick={()=> handleOpen(e) }> <EditIcon/> Editar</button>
                                 <button onClick={()=>deleteProduct(e.id)}> <DeleteIcon/> Eliminar</button>
                             </td>
 
@@ -63,7 +64,7 @@ function ProductsList({products, setIsChange}) {
                                 backdrop="static"
                                 keyboard={false}
                                 >
-                                <EditAddModal product={e} handleClose={handleClose} setIsChange={setIsChange} />
+                                <EditAddModal handleClose={handleClose} setIsChange={setIsChange} productSelected={productSelected} setProductSelected={setProductSelected} />
                                 
                             </Modal>
                         </tr>

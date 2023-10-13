@@ -144,7 +144,7 @@ function Checkout() {
 
         {
           preferenceId  && 
-          <Wallet initialization={{preferenceId, redirectMode:"modal"}}/>
+          <Wallet initialization={{preferenceId, redirectMode:"self"}}/>
         }
       </> :
       <>

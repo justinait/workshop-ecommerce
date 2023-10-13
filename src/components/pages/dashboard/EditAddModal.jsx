@@ -5,11 +5,11 @@ import EditIcon from '@mui/icons-material/Edit';
 import { db, uploadFile } from '../../../firebaseConfig';
 import {addDoc, collection} from "firebase/firestore"
 
-function EditAddModal({product, handleClose, setIsChange}) {
+function EditAddModal({handleClose, setIsChange, productSelected, setProductSelected}) {
   const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
     
-
+  // const []
   const [newProduct, setNewProduct] = useState({
     title:"",
     unit_price:0,
@@ -22,31 +22,62 @@ function EditAddModal({product, handleClose, setIsChange}) {
   const handleImage = async () => {
     setIsLoading(true);
     let url = await uploadFile(file);
-    setNewProduct({...newProduct, image:url})
+
+    if(productSelected) {
+      setProductSelected({
+        ...productSelected, image: url
+      })
+    } else {
+      setNewProduct({...newProduct, image: url})
+    }
+
     setIsLoading(false);
   }
+   
   const handleChange = (e) => {
-    setNewProduct({...newProduct, [e.target.name]: e.target.value})
+    if(productSelected) {
+      setProductSelected({
+        ...productSelected,  [e.target.name]: e.target.value
+      })
+    } else {
+      setNewProduct({...newProduct, [e.target.name]: e.target.value})
+    }
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let obj = {
-      ...newProduct,
-      unit_price: +newProduct.unit_price,
-      stock: +newProduct.stock
-    }
     const productsCollection = collection(db, "products")
-    addDoc(productsCollection, obj).then(()=> {
-      setIsChange(true);
-      handleClose();
-    })
+    
+    if(productSelected){
+      let obj = {
+        ...productSelected,
+        unit_price: +productSelected.unit_price,
+        stock: +productSelected.stock
+      }
+
+      updateDoc(doc(productsCollection, productSelected.id), obj).then(()=>{
+        setIsChange(true);
+        handleClose();
+      })
+      
+    } else{
+      let obj = {
+        ...newProduct,
+        unit_price: +newProduct.unit_price,
+        stock: +newProduct.stock
+      }
+      addDoc(productsCollection, obj).then(()=> {
+        setIsChange(true);
+        handleClose();
+      })
+
+    }
   }
 
   return (
     <>
       <Modal.Header closeButton>
-        <Modal.Title>{product.title}</Modal.Title>
+        <Modal.Title>{productSelected?.title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
          
@@ -58,6 +89,7 @@ function EditAddModal({product, handleClose, setIsChange}) {
               onChange={handleChange}
               placeholder="Nombre"
               className="input"
+              defaultValue={productSelected?.title}
             />
           </div>
           <div className="input">
@@ -67,6 +99,7 @@ function EditAddModal({product, handleClose, setIsChange}) {
               onChange={handleChange}
               placeholder="Stock"
               className="input"
+              defaultValue={productSelected?.stock}
             />
           </div>
           <div className="input">
@@ -76,6 +109,7 @@ function EditAddModal({product, handleClose, setIsChange}) {
               onChange={handleChange}
               placeholder="Precio"
               className="input"
+              defaultValue={productSelected?.unit_price}
             />
           </div>
           <div className="input">
@@ -85,17 +119,20 @@ function EditAddModal({product, handleClose, setIsChange}) {
               onChange={handleChange}
               placeholder="Categoria"
               className="input"
+              defaultValue={productSelected?.category}
             />
           </div>
 
           <div className="input">
             <input
               type="file"
-              name="image"
+              // name="image"
               onChange={(e)=>setFile(e.target.files[0])}
-              placeholder="Imagen"
+              // placeholder="Imagen"
               className="input"
+              // defaultValue={productSelected?.image}
             />
+            
           </div>
           {
             file &&
