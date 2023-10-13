@@ -11,6 +11,9 @@ import {
     sendPasswordResetEmail
 } from "firebase/auth"
 
+import {getStorage, ref, uploadBytes, getDownloadURL} from "firebase/storage"
+import {v4} from "uuid"
+
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_APIKEY,
   authDomain: import.meta.env.VITE_AUTH,
@@ -22,8 +25,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
+const storage = getStorage(app);
 const auth = getAuth(app);
-export const db = getFirestore(app)
+export const db = getFirestore(app);
 
 export const onSignIn = async ({email, password}) => {
     
@@ -70,3 +74,9 @@ export const forgotPassword = async ({email}) => {
     }
 }
 
+export const uploadFile = async (file) =>{
+    const storageRef = ref(storage, v4() )
+    await uploadBytes(storageRef, file);
+    let url = await getDownloadURL(storageRef)
+    return url;
+}

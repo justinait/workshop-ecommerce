@@ -16,6 +16,7 @@ a{
   
   /* App Bar */
 .appBar {
+  width: 100vw;
   background-color: var(--color-secondary);
   color: whitesmoke;
   padding: 0;
