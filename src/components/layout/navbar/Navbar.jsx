@@ -28,6 +28,10 @@ function Navbar(props) {
     setMobileOpen(!mobileOpen);
   };
 
+  const handleDrawerClose = ()=> {
+    setMobileOpen(false);
+  }
+
   const drawer = (
     <div className="drawer">
       <div className="toolbar" />
@@ -36,7 +40,7 @@ function Navbar(props) {
         {menuItems.map(({ id, path, title, Icon }) => {
           return (
             <li key={id}>
-              <Link to={path}>
+              <Link to={path} onClick={handleDrawerClose}>
                 <div className="listItem">
                   {Icon && <Icon className="listItemIcon" />}
                   <span className="listItemText">{title}</span>
