@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { CartContext } from '../../../context/CartContext';
 import { Link } from 'react-router-dom';
 import './Cart.css'
+import hola from '../../../../public/images/agendabasica.png'
 
 function Cart() {
 

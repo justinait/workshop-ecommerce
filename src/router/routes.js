@@ -1,19 +1,13 @@
 import Cart from "../components/pages/cart/Cart";
 import Checkout from "../components/pages/checkout/Checkout";
 import Detail from "../components/pages/detail/Detail";
-import Home from "../components/pages/home/Home";
 import ItemListContainer from "../components/pages/itemList/ItemListContainer";
 import UserOrders from "../components/pages/userOrders/UserOrders";
 
 export const routes = [
   {
-    id: "home",
-    path: "/",
-    Element: Home,
-  },
-  {
     id: "shop",
-    path: "/shop",
+    path: "/",
     Element: ItemListContainer,
   },
   {
