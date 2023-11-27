@@ -1,5 +1,5 @@
 .detailImage {
-    width: 80vw;
+    width: 100%;
 }
 .detailContainer {
     display: flex;
@@ -50,7 +50,8 @@
         margin: 3%;
     }
     .detailImage {
-        width: 500px;
+        max-width: 30vw;
+        height: auto;
     }
     .detailContainer {
         display: flex;
